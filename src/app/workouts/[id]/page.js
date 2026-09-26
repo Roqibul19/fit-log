@@ -1,14 +1,69 @@
-import Image from "next/image";
-import Link from "next/link";
-import { getWorkout } from "../../lib/api";
+"use client";
 
-export default async function WorkoutDetails({ params }) {
-  const { id } = await params;
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import { getWorkout } from "../../../lib/api";
+import { usePlan } from "../../context/PlanContext";
 
-  const workout = await getWorkout(id);
+export default function WorkoutDetails() {
+  const params = useParams();
+  const id = params.id;
+
+  const [workout, setWorkout] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const {
+    addToPlan,
+    saveWorkout,
+    plan,
+  } = usePlan();
+
+  useEffect(() => {
+    async function loadWorkout() {
+      try {
+        const data = await getWorkout(id);
+        setWorkout(data);
+      } catch (error) {
+        console.error("Failed to load workout:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    if (id) {
+      loadWorkout();
+    }
+  }, [id]);
+
+  if (loading) {
+    return (
+      <main className="details-page">
+        <div className="loading-box">
+          <div className="loader"></div>
+          <p>Loading workout...</p>
+        </div>
+      </main>
+    );
+  }
+
+  if (!workout) {
+    return (
+      <main className="details-page">
+        <div className="error-box">
+          <h2>Workout not found</h2>
+          <p>Unable to load this workout.</p>
+        </div>
+      </main>
+    );
+  }
+
+  const alreadyInPlan = plan.some(
+    (item) => item.id === workout.id
+  );
 
   return (
     <main className="details-page">
+
       <div className="details-container">
 
         {/* IMAGE */}
@@ -30,8 +85,10 @@ export default async function WorkoutDetails({ params }) {
 
           {/* TAGS */}
           <div className="details-tags">
-            {workout.category?.map((tag) => (
-              <span key={tag}>{tag}</span>
+            {workout.muscleGroups?.map((tag) => (
+              <span key={tag}>
+                {tag}
+              </span>
             ))}
           </div>
 
@@ -60,17 +117,23 @@ export default async function WorkoutDetails({ params }) {
 
             <div>
               <span>Duration</span>
-              <strong>{workout.duration} min</strong>
+              <strong>
+                {workout.duration} min
+              </strong>
             </div>
 
             <div>
               <span>Calories</span>
-              <strong>{workout.calories} kcal</strong>
+              <strong>
+                {workout.caloriesBurned} kcal
+              </strong>
             </div>
 
             <div>
               <span>Rating</span>
-              <strong>⭐ {workout.rating}</strong>
+              <strong>
+                ⭐ {workout.rating}
+              </strong>
             </div>
 
           </div>
@@ -81,11 +144,13 @@ export default async function WorkoutDetails({ params }) {
             <h2>INSTRUCTIONS</h2>
 
             <ol>
-              {workout.instructions?.map((instruction, index) => (
-                <li key={index}>
-                  {instruction}
-                </li>
-              ))}
+              {workout.instructions?.map(
+                (instruction, index) => (
+                  <li key={index}>
+                    {instruction}
+                  </li>
+                )
+              )}
             </ol>
 
           </div>
@@ -93,19 +158,32 @@ export default async function WorkoutDetails({ params }) {
           {/* BUTTONS */}
           <div className="details-buttons">
 
-            <button className="add-plan-btn">
-              ＋ Add to today&apos;s plan
+            <button
+              className="add-plan-btn"
+              onClick={() => addToPlan(workout)}
+              disabled={alreadyInPlan}
+            >
+              {alreadyInPlan
+                ? "✓ Already in today's plan"
+                : "＋ Add to today's plan"}
             </button>
 
-            <button className="save-btn">
-              ♡ Save for later
-            </button>
+            <button
+  type="button"
+  className="save-btn"
+  onClick={() => {
+    saveWorkout(workout);
+  }}
+>
+  ♡ Save for later
+</button>
 
           </div>
 
         </div>
 
       </div>
+
     </main>
   );
 }

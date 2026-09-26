@@ -1,6 +1,11 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 const PlanContext = createContext();
 
@@ -10,6 +15,7 @@ export function PlanProvider({ children }) {
   const [doneIds, setDoneIds] = useState([]);
   const [toast, setToast] = useState("");
 
+  // Load saved data from localStorage
   useEffect(() => {
     const storedPlan = localStorage.getItem("fitlog-plan");
     const storedSaved = localStorage.getItem("fitlog-saved");
@@ -28,18 +34,31 @@ export function PlanProvider({ children }) {
     }
   }, []);
 
+  // Save plan
   useEffect(() => {
-    localStorage.setItem("fitlog-plan", JSON.stringify(plan));
+    localStorage.setItem(
+      "fitlog-plan",
+      JSON.stringify(plan)
+    );
   }, [plan]);
 
+  // Save saved workouts
   useEffect(() => {
-    localStorage.setItem("fitlog-saved", JSON.stringify(saved));
+    localStorage.setItem(
+      "fitlog-saved",
+      JSON.stringify(saved)
+    );
   }, [saved]);
 
+  // Save completed workouts
   useEffect(() => {
-    localStorage.setItem("fitlog-done", JSON.stringify(doneIds));
+    localStorage.setItem(
+      "fitlog-done",
+      JSON.stringify(doneIds)
+    );
   }, [doneIds]);
 
+  // Toast
   const showToast = (message) => {
     setToast(message);
 
@@ -48,54 +67,65 @@ export function PlanProvider({ children }) {
     }, 2500);
   };
 
+  // Add workout to today's plan
   const addToPlan = (workout) => {
     if (plan.some((item) => item.id === workout.id)) {
-      showToast("Already in today's plan");
+      showToast("Already in today's plan!");
       return;
     }
 
     if (plan.length >= 5) {
-      showToast("Today's plan is full. Maximum 5 lifts.");
+      showToast("Today's plan is full!");
       return;
     }
 
     setPlan((prev) => [...prev, workout]);
 
-    showToast(`${workout.name} added to today's plan`);
+    showToast("Added to today's plan!");
   };
 
+  // Remove workout from plan
   const removeFromPlan = (id) => {
-    setPlan((prev) => prev.filter((item) => item.id !== id));
+    setPlan((prev) =>
+      prev.filter((item) => item.id !== id)
+    );
 
     setDoneIds((prev) =>
       prev.filter((item) => item !== id)
     );
 
-    showToast("Workout removed");
+    showToast("Workout removed!");
   };
 
+  // Save workout
   const saveWorkout = (workout) => {
-    if (saved.some((item) => item.id === workout.id)) {
-      showToast("Already saved");
+    const alreadySaved = saved.some(
+      (item) => item.id === workout.id
+    );
+
+    if (alreadySaved) {
+      showToast("Already saved!");
       return;
     }
 
     setSaved((prev) => [...prev, workout]);
 
-    showToast(`${workout.name} saved for later`);
+    showToast("Saved!");
   };
 
+  // Remove saved workout
   const removeSaved = (id) => {
     setSaved((prev) =>
       prev.filter((item) => item.id !== id)
     );
 
-    showToast("Removed from saved");
+    showToast("Removed from saved!");
   };
 
+  // Mark workout as done
   const markAsDone = (id) => {
     if (doneIds.includes(id)) {
-      showToast("Workout already completed");
+      showToast("Workout already completed!");
       return;
     }
 
@@ -120,8 +150,25 @@ export function PlanProvider({ children }) {
     >
       {children}
 
+      {/* Toast Notification */}
       {toast && (
-        <div className="fitlog-toast">
+        <div
+          style={{
+            position: "fixed",
+            left: "50%",
+            bottom: "30px",
+            transform: "translateX(-50%)",
+            background: "#f4c430",
+            color: "#111",
+            padding: "13px 24px",
+            borderRadius: "999px",
+            fontSize: "14px",
+            fontWeight: "800",
+            zIndex: 99999,
+            boxShadow: "0 10px 30px rgba(0, 0, 0, 0.4)",
+            whiteSpace: "nowrap",
+          }}
+        >
           {toast}
         </div>
       )}
