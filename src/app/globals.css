@@ -97,279 +97,626 @@ a {
   border: 1px solid #555;
 }
 
-/* ================= CONTAINER ================= */
+
+/* =====================================================
+   GLOBAL CONTAINER
+===================================================== */
 
 .container {
   width: min(1200px, 92%);
   margin: 0 auto;
 }
 
-/* ================= HERO ================= */
+
+/* =====================================================
+   HERO
+===================================================== */
 
 .hero {
-  margin-top: 45px;
+  width: min(1200px, 92%);
+  margin: 45px auto 0;
+
   min-height: 430px;
   padding: 55px;
+
   border-radius: 16px;
+
   background: var(--card);
+
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
+
   overflow: hidden;
+  border: 1px solid var(--border);
+
+  position: relative;
 }
+
 
 .hero-content {
   max-width: 600px;
+  position: relative;
+  z-index: 2;
 }
+
+
+/* WORKOUT LIBRARY */
 
 .eyebrow {
+  display: block;
+
   color: var(--accent);
+
   font-family: "Barlow Condensed", sans-serif;
+
   font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 14px;
+  font-weight: 700;
+
+  letter-spacing: 0.5px;
+
+  margin-bottom: 16px;
+
+  text-transform: uppercase;
 }
 
+
+/* HERO HEADING */
+
 .hero h1 {
+  color: var(--text);
+
   font-family: "Barlow Condensed", sans-serif;
+
   font-size: clamp(48px, 6vw, 78px);
+
   line-height: 0.95;
+
   letter-spacing: 1px;
-  margin-bottom: 25px;
+
+  font-weight: 800;
+
+  margin: 0 0 25px;
+
+  text-transform: uppercase;
 }
+
+
+/* HERO DESCRIPTION */
 
 .hero-text {
   color: var(--muted);
+
   line-height: 1.7;
+
+  font-size: 15px;
+
   max-width: 530px;
-  margin-bottom: 28px;
+
+  margin: 0 0 28px;
 }
 
+
+/* HERO BUTTON */
+
 .primary-btn {
-  display: inline-block;
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
   background: var(--accent);
+
   color: #111;
+
   padding: 13px 22px;
+
   border-radius: 25px;
-  font-weight: 700;
-  transition: 0.2s;
+
+  font-weight: 800;
+
+  font-size: 13px;
+
+  text-decoration: none;
+
+  text-transform: uppercase;
+
+  transition: 0.2s ease;
 }
+
 
 .primary-btn:hover {
   transform: translateY(-2px);
+
+  background: #d5ff3d;
 }
+
+
+/* HERO IMAGE */
 
 .hero-image {
   height: 100%;
+
   display: flex;
+
   justify-content: center;
+
   align-items: center;
+
+  position: relative;
 }
+
 
 .hero-image img {
   width: 100%;
+
   max-width: 470px;
+
   max-height: 390px;
+
   object-fit: contain;
+
+  display: block;
 }
 
-/* ================= LIBRARY ================= */
+
+/* =====================================================
+   LIBRARY
+===================================================== */
 
 .library {
-  padding: 70px 0;
+  width: min(1200px, 92%);
+
+  margin: 0 auto;
+
+  padding: 70px 0 90px;
 }
+
+
+/* ================= LIBRARY HEADING ================= */
 
 .section-heading {
   margin-bottom: 28px;
+  text-align: left;
 }
 
 .section-heading h2 {
+  color: var(--text);
+
   font-family: "Barlow Condensed", sans-serif;
+
   font-size: 38px;
-  margin-bottom: 5px;
+  line-height: 1;
+
+  font-weight: 800;
+
+  margin: 0 0 7px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0;
 }
 
 .section-heading p {
   color: var(--muted);
+
   font-size: 14px;
+
+  line-height: 1.5;
+
+  margin: 0;
 }
 
-/* ================= WORKOUT GRID ================= */
+/* =====================================================
+   WORKOUT GRID
+===================================================== */
 
 .workout-grid {
   display: grid;
+
   grid-template-columns: repeat(3, 1fr);
+
   gap: 22px;
 }
 
-/* ================= WORKOUT CARD ================= */
+
+/* =====================================================
+   WORKOUT CARD
+===================================================== */
 
 .workout-card {
   background: var(--card);
+
   border: 1px solid var(--border);
+
   border-radius: 12px;
+
   overflow: hidden;
+
   display: block;
-  transition: 0.2s;
+
+  text-decoration: none;
+
+  color: var(--text);
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
+
 
 .workout-card:hover {
   transform: translateY(-4px);
+
   border-color: #414754;
+
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
 }
+
+
+/* CARD IMAGE */
 
 .workout-card > img {
   width: 100%;
+
   height: 210px;
+
   object-fit: cover;
+
   display: block;
 }
+
+
+/* CARD CONTENT */
 
 .workout-card-content {
   padding: 18px;
 }
 
+
+/* TAGS */
+
 .tags {
   display: flex;
+
   gap: 7px;
+
   flex-wrap: wrap;
+
   margin-bottom: 12px;
 }
 
+
 .tags span {
   background: var(--accent);
+
   color: #111;
+
   padding: 4px 9px;
+
   border-radius: 20px;
+
   font-size: 10px;
-  font-weight: 700;
+
+  font-weight: 800;
+
   text-transform: uppercase;
+
+  letter-spacing: 0.3px;
 }
 
+
+/* CARD TITLE */
+
 .workout-card h3 {
+  color: var(--text);
+
   font-family: "Barlow Condensed", sans-serif;
+
   font-size: 23px;
-  margin-bottom: 7px;
+
+  line-height: 1.1;
+
+  font-weight: 700;
+
+  margin: 0 0 7px;
 }
+
+
+/* EQUIPMENT */
 
 .workout-card p {
   color: var(--muted);
+
   font-size: 13px;
-  margin-bottom: 15px;
+
+  line-height: 1.5;
+
+  margin: 0 0 15px;
 }
+
+
+/* CARD STATS */
 
 .workout-stats {
   display: flex;
+
+  align-items: center;
+
   gap: 12px;
+
   color: var(--muted);
+
   font-size: 12px;
+
+  flex-wrap: wrap;
 }
 
-/* ================= FOOTER ================= */
+
+/* =====================================================
+   FOOTER
+===================================================== */
 
 .footer {
   min-height: 90px;
+
   padding: 25px 6%;
+
   background: #171b23;
+
   border-top: 1px solid var(--border);
+
   display: flex;
+
   align-items: center;
+
   justify-content: space-between;
+
   color: var(--muted);
+
   font-size: 13px;
 }
 
+
 .footer div:first-child {
   color: var(--text);
+
   font-weight: 600;
 }
 
-/* ================= TOAST ================= */
+
+/* =====================================================
+   TOAST
+===================================================== */
 
 .toast {
   position: fixed;
+
   right: 25px;
+
   bottom: 25px;
+
   background: var(--accent);
+
   color: #111;
+
   padding: 12px 18px;
+
   border-radius: 8px;
-  font-weight: 600;
+
+  font-weight: 700;
+
+  font-size: 14px;
+
   z-index: 1000;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
-/* ================= RESPONSIVE ================= */
+
+/* =====================================================
+   RESPONSIVE - TABLET
+===================================================== */
 
 @media (max-width: 900px) {
+
   .navbar {
     padding: 0 20px;
   }
+
 
   .nav-links {
     gap: 18px;
   }
 
+
   .hero {
+    width: calc(100% - 40px);
+
     grid-template-columns: 1fr;
-    padding: 35px 25px;
+
+    padding: 40px 35px;
+
+    margin-top: 30px;
   }
+
+
+  .hero-content {
+    max-width: 100%;
+  }
+
 
   .hero-image {
     margin-top: 25px;
+
+    min-height: 320px;
   }
+
+
+  .hero-image img {
+    max-width: 400px;
+
+    max-height: 330px;
+  }
+
 
   .workout-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+
+
+  .library {
+    width: calc(100% - 40px);
+  }
 }
 
+
+/* =====================================================
+   RESPONSIVE - MOBILE
+===================================================== */
+
 @media (max-width: 600px) {
+
   .navbar {
     height: 64px;
   }
+
 
   .nav-links {
     display: none;
   }
 
+
   .nav-stats {
     gap: 8px;
   }
 
+
   .hero {
+    width: calc(100% - 30px);
+
     margin-top: 20px;
-    padding: 32px 20px;
-    border-radius: 12px;
+
+    padding: 42px 25px 25px;
+
+    border-radius: 14px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: stretch;
   }
+
+
+  .eyebrow {
+    font-size: 14px;
+
+    margin-bottom: 20px;
+  }
+
 
   .hero h1 {
     font-size: 52px;
+
+    line-height: 0.98;
+
+    letter-spacing: 0;
   }
 
+
   .hero-text {
+    font-size: 15px;
+
+    line-height: 1.65;
+
+    margin-bottom: 25px;
+  }
+
+
+  .primary-btn {
+    width: fit-content;
+
+    padding: 14px 22px;
+  }
+
+
+  .hero-image {
+    min-height: 320px;
+
+    margin-top: 15px;
+
+    align-items: flex-end;
+  }
+
+
+  .hero-image img {
+    width: 100%;
+
+    max-width: 330px;
+
+    max-height: 330px;
+  }
+
+
+  .library {
+    width: calc(100% - 30px);
+
+    padding: 50px 0 70px;
+  }
+
+
+  .section-heading {
+    margin-bottom: 22px;
+  }
+
+
+  .section-heading h2 {
+    font-size: 34px;
+  }
+
+
+  .section-heading p {
     font-size: 14px;
   }
 
-  .hero-image img {
-    max-width: 330px;
-  }
-
-  .library {
-    padding: 45px 0;
-  }
 
   .workout-grid {
     grid-template-columns: 1fr;
+
     gap: 16px;
   }
+
 
   .workout-card > img {
     height: 220px;
   }
 
+
+  .workout-card-content {
+    padding: 17px;
+  }
+
+
   .footer {
     flex-direction: column;
+
     gap: 12px;
+
+    text-align: center;
+  }
+
+
+  .toast {
+    left: 20px;
+
+    right: 20px;
+
+    bottom: 20px;
+
     text-align: center;
   }
 }
@@ -633,6 +980,11 @@ a {
   color: #999;
 }
 
+
+/* =========================
+   PLAN METRICS
+========================= */
+
 .plan-metrics {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -662,11 +1014,29 @@ a {
   font-size: 36px;
 }
 
+
+/* =========================
+   PLAN CONTROLS
+========================= */
+
+.plan-controls {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 25px;
+  margin-bottom: 25px;
+}
+
+
+/* =========================
+   PLAN TABS
+========================= */
+
 .plan-tabs {
   display: flex;
   gap: 8px;
   border-bottom: 1px solid #292929;
-  margin-bottom: 25px;
+  margin: 0;
 }
 
 .plan-tabs button {
@@ -676,6 +1046,11 @@ a {
   padding: 15px 18px;
   font-weight: 800;
   cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.plan-tabs button:hover {
+  color: #fff;
 }
 
 .plan-tabs button.active {
@@ -685,7 +1060,102 @@ a {
 
 .plan-tabs span {
   margin-left: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: #292929;
+  color: #aaa;
+  font-size: 10px;
 }
+
+.plan-tabs button.active span {
+  background: #f4c430;
+  color: #111;
+}
+
+
+/* =========================
+   SORT BY
+========================= */
+
+.sort-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 6px;
+}
+
+.sort-box label {
+  color: #888;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.sort-select-wrapper {
+  position: relative;
+  min-width: 180px;
+}
+
+.sort-select-wrapper select {
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+
+  background: #151515;
+  color: #fff;
+
+  border: 1px solid #333;
+  border-radius: 9px;
+
+  padding: 11px 38px 11px 13px;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+  outline: none;
+
+  transition: 0.2s ease;
+}
+
+.sort-select-wrapper select:hover {
+  border-color: #555;
+}
+
+.sort-select-wrapper select:focus {
+  border-color: #f4c430;
+  box-shadow: 0 0 0 2px rgba(244, 196, 48, 0.08);
+}
+
+.sort-select-wrapper select option {
+  background: #151515;
+  color: #fff;
+}
+
+.sort-chevron {
+  position: absolute;
+  right: 13px;
+  top: 50%;
+
+  transform: translateY(-55%);
+
+  color: #f4c430;
+  font-size: 17px;
+  font-weight: 800;
+
+  pointer-events: none;
+}
+
+
+/* =========================
+   PLAN LIST
+========================= */
 
 .plan-list {
   display: flex;
@@ -698,10 +1168,18 @@ a {
   grid-template-columns: 110px 1fr auto;
   gap: 20px;
   align-items: center;
+
   background: #151515;
   border: 1px solid #292929;
+
   padding: 15px;
   border-radius: 12px;
+
+  transition: 0.2s ease;
+}
+
+.plan-card:hover {
+  border-color: #3b3b3b;
 }
 
 .plan-card img {
@@ -725,7 +1203,13 @@ a {
   gap: 15px;
   color: #aaa;
   font-size: 13px;
+  flex-wrap: wrap;
 }
+
+
+/* =========================
+   TAGS
+========================= */
 
 .plan-card .tags {
   display: flex;
@@ -737,11 +1221,18 @@ a {
   background: #28220e;
   color: #f4c430;
   border: 1px solid #514516;
+
   padding: 4px 8px;
   border-radius: 999px;
+
   font-size: 10px;
   font-weight: 700;
 }
+
+
+/* =========================
+   PLAN ACTIONS
+========================= */
 
 .plan-actions {
   display: flex;
@@ -754,21 +1245,33 @@ a {
 .remove-button {
   border-radius: 7px;
   padding: 9px 12px;
+
   font-size: 12px;
   font-weight: 700;
+
   cursor: pointer;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .view-button {
   background: #252525;
   color: white;
+  border: 1px solid #333;
+}
+
+.view-button:hover {
+  background: #303030;
 }
 
 .done-button {
   background: #f4c430;
   color: #111;
   border: 0;
+}
+
+.done-button:hover {
+  background: #ffd84f;
 }
 
 .completed-btn {
@@ -778,20 +1281,35 @@ a {
 .remove-button {
   width: 35px;
   height: 35px;
+
   padding: 0;
+
   background: transparent;
   color: #999;
+
   border: 1px solid #333;
+
   font-size: 20px;
+}
+
+.remove-button:hover {
+  color: #fff;
+  border-color: #555;
 }
 
 .plan-card.completed {
   opacity: 0.6;
 }
 
+
+/* =========================
+   EMPTY PLAN
+========================= */
+
 .empty-plan {
   text-align: center;
   padding: 80px 20px;
+
   border: 1px dashed #333;
   border-radius: 15px;
 }
@@ -799,11 +1317,15 @@ a {
 .empty-icon {
   width: 55px;
   height: 55px;
+
   margin: 0 auto 20px;
+
   border: 1px solid #444;
   border-radius: 50%;
+
   display: grid;
   place-items: center;
+
   color: #f4c430;
   font-size: 28px;
 }
@@ -813,8 +1335,185 @@ a {
   margin-bottom: 25px;
 }
 
-/* Mobile */
+
+/* =========================
+   404 PAGE
+========================= */
+
+.not-found-page {
+  min-height: 75vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+
+  padding: 30px 20px;
+}
+
+.not-found-number {
+  font-size: clamp(100px, 20vw, 220px);
+  line-height: 0.8;
+
+  font-weight: 900;
+  color: #f4c430;
+
+  letter-spacing: -8px;
+}
+
+.not-found-page h1 {
+  margin-top: 35px;
+  font-size: 32px;
+}
+
+.not-found-page p {
+  color: #888;
+  margin-bottom: 25px;
+}
+
+
+/* =========================
+   LOADING PAGE
+========================= */
+
+.global-loading {
+  min-height: 70vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  gap: 15px;
+
+  color: #888;
+}
+
+.global-loading .loader {
+  width: 42px;
+  height: 42px;
+
+  border: 4px solid #333;
+  border-top-color: #f4c430;
+
+  border-radius: 50%;
+
+  animation: fitlog-spin 0.8s linear infinite;
+}
+
+@keyframes fitlog-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =========================
+   HOME / LIBRARY SORT
+========================= */
+
+.sort-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sort-wrapper label {
+  color: #888;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+}
+
+.sort-wrapper select {
+  min-width: 140px;
+
+  padding: 11px 35px 11px 13px;
+
+  background: #151515;
+  color: #fff;
+
+  border: 1px solid #333;
+  border-radius: 8px;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+  outline: none;
+}
+
+.sort-wrapper select:focus {
+  border-color: #f4c430;
+}
+
+.sort-wrapper select option {
+  background: #151515;
+  color: #fff;
+}
+
+
+/* =========================
+   LOADING BOX
+========================= */
+
+.loading-box {
+  min-height: 300px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 15px;
+
+  color: #888;
+}
+
+.loading-box .loader {
+  width: 40px;
+  height: 40px;
+
+  border: 4px solid #333;
+  border-top-color: #f4c430;
+
+  border-radius: 50%;
+
+  animation: fitlog-spin 0.8s linear infinite;
+}
+
+
+/* =========================
+   ERROR BOX
+========================= */
+
+.error-box {
+  padding: 25px;
+
+  background: #211414;
+  border: 1px solid #552222;
+
+  border-radius: 10px;
+
+  text-align: center;
+  color: #ddd;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
 @media (max-width: 800px) {
+
+  .plan-controls {
+    align-items: stretch;
+  }
+
   .plan-card {
     grid-template-columns: 80px 1fr;
   }
@@ -826,27 +1525,104 @@ a {
 
   .plan-actions {
     grid-column: 1 / -1;
+
     justify-content: flex-start;
     flex-wrap: wrap;
   }
+
 }
 
+
+/* =========================
+   MOBILE
+========================= */
+
 @media (max-width: 600px) {
+
   .my-plan-page {
     padding: 50px 15px;
   }
 
+  .plan-header {
+    margin-bottom: 28px;
+  }
+
+  .plan-header h1 {
+    letter-spacing: -2px;
+  }
+
   .plan-metrics {
     grid-template-columns: 1fr;
+    gap: 10px;
+    margin-bottom: 30px;
   }
+
+  .metric-card {
+    padding: 20px;
+  }
+
+  /* Tabs + Sort */
+  .plan-controls {
+    width: 100%;
+
+    flex-direction: column;
+    align-items: stretch;
+
+    gap: 18px;
+  }
+
+  .plan-tabs {
+    width: 100%;
+    gap: 4px;
+  }
+
+  .plan-tabs button {
+    padding: 12px 10px;
+    font-size: 12px;
+  }
+
+  .sort-box {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 7px;
+
+    padding-bottom: 0;
+  }
+
+  .sort-box label {
+    font-size: 10px;
+  }
+
+  .sort-select-wrapper {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .sort-select-wrapper select {
+    width: 100%;
+    padding: 13px 40px 13px 14px;
+  }
+
+
+  /* Cards */
 
   .plan-card {
     grid-template-columns: 1fr;
+    gap: 15px;
   }
 
   .plan-card img {
     width: 100%;
     height: 180px;
+  }
+
+  .plan-card-info h3 {
+    font-size: 22px;
   }
 
   .plan-actions {
@@ -861,143 +1637,17 @@ a {
 
   .plan-stats {
     flex-wrap: wrap;
+    gap: 10px;
   }
-}
 
-/* =========================
-   404 PAGE
-========================= */
 
-.not-found-page {
-  min-height: 75vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 30px 20px;
-}
+  /* Empty */
 
-.not-found-number {
-  font-size: clamp(100px, 20vw, 220px);
-  line-height: 0.8;
-  font-weight: 900;
-  color: #f4c430;
-  letter-spacing: -8px;
-}
-
-.not-found-page h1 {
-  margin-top: 35px;
-  font-size: 32px;
-}
-
-.not-found-page p {
-  color: #888;
-  margin-bottom: 25px;
-}
-/* =========================
-   LOADING PAGE
-========================= */
-
-.global-loading {
-  min-height: 70vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
-  color: #888;
-}
-
-.global-loading .loader {
-  width: 42px;
-  height: 42px;
-  border: 4px solid #333;
-  border-top-color: #f4c430;
-  border-radius: 50%;
-  animation: fitlog-spin 0.8s linear infinite;
-}
-
-@keyframes fitlog-spin {
-  to {
-    transform: rotate(360deg);
+  .empty-plan {
+    padding: 60px 15px;
   }
-}
 
-/* =========================
-   SORT DROPDOWN
-========================= */
-
-.section-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
-  gap: 25px;
-}
-
-.sort-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.sort-wrapper label {
-  color: #888;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.sort-wrapper select {
-  min-width: 140px;
-  padding: 11px 35px 11px 13px;
-  background: #151515;
-  color: #fff;
-  border: 1px solid #333;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 700;
-  cursor: pointer;
-  outline: none;
-}
-
-.sort-wrapper select:focus {
-  border-color: #f4c430;
-}
-
-.loading-box {
-  min-height: 300px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-  color: #888;
-}
-
-.loading-box .loader {
-  width: 40px;
-  height: 40px;
-  border: 4px solid #333;
-  border-top-color: #f4c430;
-  border-radius: 50%;
-  animation: fitlog-spin 0.8s linear infinite;
-}
-
-.error-box {
-  padding: 25px;
-  background: #211414;
-  border: 1px solid #552222;
-  border-radius: 10px;
-  text-align: center;
-  color: #ddd;
-}
-
-@media (max-width: 700px) {
-  .section-heading {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+  /* Existing home/library sort */
 
   .sort-wrapper {
     width: 100%;
@@ -1008,4 +1658,31 @@ a {
     flex: 1;
     max-width: 180px;
   }
+}
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 400px) {
+
+  .plan-tabs button {
+    padding-left: 7px;
+    padding-right: 7px;
+  }
+
+  .plan-tabs span {
+    margin-left: 4px;
+  }
+
+  .plan-actions {
+    flex-wrap: wrap;
+  }
+
+  .view-button,
+  .done-button {
+    min-width: 120px;
+  }
+
 }

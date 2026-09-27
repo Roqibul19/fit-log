@@ -13,7 +13,7 @@ export default function WorkoutCard({ workout }) {
 
       <div className="workout-card-content">
         <div className="tags">
-          {workout.category?.map((tag) => (
+          {workout.muscleGroups?.map((tag) => (
             <span key={tag}>{tag}</span>
           ))}
         </div>
@@ -24,7 +24,7 @@ export default function WorkoutCard({ workout }) {
 
         <div className="workout-stats">
           <span>◷ {workout.duration} min</span>
-          <span>🔥 {workout.calories} kcal</span>
+          <span>🔥 {workout.caloriesBurned} kcal</span>
           <span>☆ {workout.rating}</span>
         </div>
       </div>

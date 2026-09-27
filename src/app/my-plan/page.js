@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { usePlan } from "../context/PlanContext";
 
 export default function MyPlan() {
@@ -15,44 +15,57 @@ export default function MyPlan() {
   } = usePlan();
 
   const [activeTab, setActiveTab] = useState("plan");
+  const [sortBy, setSortBy] = useState("duration");
 
   const totalMinutes = plan.reduce(
-    (total, workout) =>
-      total + Number(workout.duration || 0),
+    (total, workout) => total + Number(workout.duration || 0),
     0
   );
 
   const totalCalories = plan.reduce(
-    (total, workout) =>
-      total + Number(workout.caloriesBurned || 0),
+    (total, workout) => total + Number(workout.caloriesBurned || 0),
     0
   );
 
-  const currentWorkouts =
-    activeTab === "plan" ? plan : saved;
+  const currentWorkouts = activeTab === "plan" ? plan : saved;
+
+  // Sort current list
+  const sortedWorkouts = useMemo(() => {
+    return [...currentWorkouts].sort((a, b) => {
+      if (sortBy === "duration") {
+        return Number(a.duration || 0) - Number(b.duration || 0);
+      }
+
+      if (sortBy === "calories") {
+        return (
+          Number(a.caloriesBurned || 0) -
+          Number(b.caloriesBurned || 0)
+        );
+      }
+
+      if (sortBy === "rating") {
+        return Number(a.rating || 0) - Number(b.rating || 0);
+      }
+
+      return 0;
+    });
+  }, [currentWorkouts, sortBy]);
 
   return (
     <main className="my-plan-page">
-
-      {/* HEADER */}
+      {/* Header */}
       <section className="plan-header">
-
-        <span className="eyebrow">
-          YOUR WORKOUT
-        </span>
+        <span className="eyebrow">YOUR WORKOUT</span>
 
         <h1>MY PLAN</h1>
 
         <p>
-          Cap of five lifts for today. Finish them,
-          then load more.
+          Cap of five lifts for today. Finish them, then load more.
         </p>
-
       </section>
 
-      {/* METRICS */}
+      {/* Metrics */}
       <section className="plan-metrics">
-
         <div className="metric-card">
           <span>EXERCISES</span>
           <strong>{plan.length}</strong>
@@ -67,70 +80,69 @@ export default function MyPlan() {
           <span>CALORIES</span>
           <strong>{totalCalories}</strong>
         </div>
-
       </section>
 
-      {/* TABS */}
-      <div className="plan-tabs">
+      {/* Tabs + Sort */}
+      <div className="plan-controls">
+        <div className="plan-tabs">
+          <button
+            type="button"
+            className={activeTab === "plan" ? "active" : ""}
+            onClick={() => setActiveTab("plan")}
+          >
+            TODAY'S PLAN <span>{plan.length}</span>
+          </button>
 
-        <button
-          type="button"
-          className={
-            activeTab === "plan" ? "active" : ""
-          }
-          onClick={() => setActiveTab("plan")}
-        >
-          TODAY'S PLAN
-          <span>{plan.length}</span>
-        </button>
+          <button
+            type="button"
+            className={activeTab === "saved" ? "active" : ""}
+            onClick={() => setActiveTab("saved")}
+          >
+            SAVED <span>{saved.length}</span>
+          </button>
+        </div>
 
-        <button
-          type="button"
-          className={
-            activeTab === "saved" ? "active" : ""
-          }
-          onClick={() => setActiveTab("saved")}
-        >
-          SAVED
-          <span>{saved.length}</span>
-        </button>
+        {/* Sort */}
+         <div className="sort-box">
+    <label htmlFor="sort-workouts">SORT BY</label>
 
-      </div>
+    <div className="sort-select-wrapper">
+      <select
+        id="sort-workouts"
+        value={sortBy}
+        onChange={(e) => setSortBy(e.target.value)}
+      >
+        <option value="duration">Duration</option>
+        <option value="calories">Calories</option>
+        <option value="rating">Rating</option>
+      </select>
 
-      {/* EMPTY STATE */}
-      {currentWorkouts.length === 0 ? (
+      <span className="sort-chevron">⌄</span>
+    </div>
+  </div>
 
+</div>
+
+      {/* Empty State */}
+      {sortedWorkouts.length === 0 ? (
         <section className="empty-plan">
-
-          <div className="empty-icon">
-            +
-          </div>
+          <div className="empty-icon">+</div>
 
           <h2>NOTHING HERE YET</h2>
 
           <p>
-            Browse the library and add a lift
-            to get today moving.
+            Browse the library and add a lift to get today moving.
           </p>
 
-          <Link
-            href="/"
-            className="primary-button"
-          >
-            Go to workouts →
+          <Link href="/" className="primary-button">
+            GO TO WORKOUTS →
           </Link>
-
         </section>
-
       ) : (
-
-        /* WORKOUT LIST */
+        /* Workout List */
         <section className="plan-list">
-
-          {currentWorkouts.map((workout) => {
-
-            const isDone =
-              doneIds.includes(workout.id);
+          {sortedWorkouts.map((workout) => {
+            const isDone = doneIds.includes(workout.id);
 
             return (
               <article
@@ -141,26 +153,17 @@ export default function MyPlan() {
                     : "plan-card"
                 }
               >
-
-                {/* IMAGE */}
                 <img
                   src={workout.image}
                   alt={workout.name}
                 />
 
-                {/* INFORMATION */}
                 <div className="plan-card-info">
-
+                  {/* Muscle Tags */}
                   <div className="tags">
-
-                    {workout.muscleGroups?.map(
-                      (tag) => (
-                        <span key={tag}>
-                          {tag}
-                        </span>
-                      )
-                    )}
-
+                    {workout.muscleGroups?.map((tag) => (
+                      <span key={tag}>{tag}</span>
+                    ))}
                   </div>
 
                   <h3>{workout.name}</h3>
@@ -168,9 +171,8 @@ export default function MyPlan() {
                   <p>{workout.equipment}</p>
 
                   <div className="plan-stats">
-
                     <span>
-                      ⏱ {workout.duration} min
+                      ◷ {workout.duration} min
                     </span>
 
                     <span>
@@ -180,14 +182,10 @@ export default function MyPlan() {
                     <span>
                       ★ {workout.rating}
                     </span>
-
                   </div>
-
                 </div>
 
-                {/* ACTIONS */}
                 <div className="plan-actions">
-
                   <Link
                     href={`/workouts/${workout.id}`}
                     className="view-button"
@@ -195,7 +193,6 @@ export default function MyPlan() {
                     View Details
                   </Link>
 
-                  {/* Mark as Done only for Today's Plan */}
                   {activeTab === "plan" && (
                     <button
                       type="button"
@@ -204,9 +201,7 @@ export default function MyPlan() {
                           ? "done-button completed-btn"
                           : "done-button"
                       }
-                      onClick={() =>
-                        markAsDone(workout.id)
-                      }
+                      onClick={() => markAsDone(workout.id)}
                     >
                       {isDone
                         ? "✓ Done"
@@ -214,31 +209,23 @@ export default function MyPlan() {
                     </button>
                   )}
 
-                  {/* Remove */}
                   <button
                     type="button"
                     className="remove-button"
-                    onClick={() => {
-                      if (activeTab === "plan") {
-                        removeFromPlan(workout.id);
-                      } else {
-                        removeSaved(workout.id);
-                      }
-                    }}
+                    onClick={() =>
+                      activeTab === "plan"
+                        ? removeFromPlan(workout.id)
+                        : removeSaved(workout.id)
+                    }
                   >
                     ×
                   </button>
-
                 </div>
-
               </article>
             );
           })}
-
         </section>
-
       )}
-
     </main>
   );
 }

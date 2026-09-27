@@ -8,89 +8,72 @@ export default async function Home() {
   return (
     <div className="container">
 
-      {/* =========================
-          HERO
-      ========================= */}
-      <section className="hero">
+      {/* HERO */}
+    <section className="hero">
 
-        <div className="hero-content">
+  <div className="hero-content">
 
-          <span className="hero-eyebrow">
-            WORKOUT LIBRARY
-          </span>
+    <span className="eyebrow">
+      WORKOUT LIBRARY
+    </span>
 
-          <h1>
-            TRAIN WITH INTENT.
-            <br />
-            LOG EVERY SET.
-          </h1>
+    <h1>
+      TRAIN WITH INTENT.
+      <br />
+      LOG EVERY SET.
+    </h1>
 
-          <p>
-            FitLog is a dark, no-nonsense gym companion:
-            pick a lift, lock it into today&apos;s plan,
-            and watch the week&apos;s work add up.
-          </p>
+    <p className="hero-text">
+      FitLog is a dark, no-nonsense gym companion:
+      pick a lift, lock it into today&apos;s plan,
+      and watch the week&apos;s work add up.
+    </p>
 
-          <Link
-            href="#library"
-            className="hero-button"
-          >
-            BROWSE WORKOUTS
-            <span>→</span>
-          </Link>
+    <Link
+      href="#library"
+      className="primary-btn"
+    >
+      BROWSE WORKOUTS →
+    </Link>
 
-        </div>
+  </div>
 
-        <div className="hero-image">
+  <div className="hero-image">
+    <img
+      src="/assets/banner.png"
+      alt="Workout Library"
+    />
+  </div>
 
-          <img
-            src="/assets/banner.png"
-            alt="FitLog Workout"
-          />
-
-        </div>
-
-      </section>
+</section>
 
 
-      {/* =========================
-          WORKOUT LIBRARY
-      ========================= */}
-      <section
-        id="library"
-        className="library"
-      >
+{/* ================= LIBRARY ================= */}
 
-        <div className="library-heading">
+<section id="library" className="library">
 
-          <span className="section-eyebrow">
-            THE LIBRARY
-          </span>
+  <div className="section-heading">
 
-          <h2>
-            WORKOUT LIBRARY
-          </h2>
+    <h2>THE LIBRARY</h2>
 
-          <p>
-            Twelve lifts covering every major muscle group.
-          </p>
+    <p>
+      Twelve lifts covering every major muscle group.
+    </p>
 
-        </div>
+  </div>
 
+  <div className="workout-grid">
 
-        {/* WORKOUT CARDS */}
-        <div className="workout-grid">
+    {workouts.map((workout) => (
+      <WorkoutCard
+        key={workout.id}
+        workout={workout}
+      />
+    ))}
 
-          {workouts.map((workout) => (
-            <WorkoutCard
-              key={workout.id}
-              workout={workout}
-            />
-          ))}
+  </div>
 
-        </div>
-
-      </section>
+</section>
 
     </div>
   );
