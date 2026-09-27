@@ -13,10 +13,18 @@ export default function Navbar() {
     <nav className="navbar">
 
       {/* Logo */}
-      <div className="nav-logo">
-        <span>✦</span>
-        <strong>FITLOG</strong>
-      </div>
+<Link
+  href="/"
+  className="nav-logo"
+  aria-label="FitLog Home"
+>
+  <img
+    src="/assets/logo.png"
+    alt="FITLOG"
+  />
+
+  <strong>FITLOG</strong>
+</Link>
 
       {/* Navigation Links */}
       <div className="nav-links">
